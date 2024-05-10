@@ -30,6 +30,7 @@
         <activity android:name=".activity.PaddingMarginActivity" />
 
 
+        <activity android:name=".activity.BubbleTriangleActivity" />
 
     </application>
 
