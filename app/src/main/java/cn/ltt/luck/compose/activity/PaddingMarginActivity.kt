@@ -39,6 +39,7 @@ import cn.ltt.luck.compose.ui.theme.StressColor
  * @author 李桐桐
  * date    2024/4/29
  * desc    Compose 模式下内间距和外间距如何设置
+ * https://www.jianshu.com/p/f4f5f3004d37
  * ============================================================
  **/
 class PaddingMarginActivity : BaseActivity() {

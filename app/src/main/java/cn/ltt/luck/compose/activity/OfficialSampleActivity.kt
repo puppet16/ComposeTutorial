@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import cn.ltt.luck.compose.R
 import cn.ltt.luck.compose.activity.base.BaseActivity
 import cn.ltt.luck.compose.ui.theme.ComposeTutorialTheme
+import cn.ltt.luck.compose.widget.LogUtil
 
 /**
  * ============================================================
@@ -73,11 +75,14 @@ class OfficialSampleActivity : BaseActivity() {
             Spacer(modifier = Modifier.width(8.dp))
             // 是否展开
             var isExpanded by remember { mutableStateOf(false) }
+
             // surfaceColor将从一种颜色逐渐更新到另一种颜色
             val surfaceColor by animateColorAsState(
-                if (isExpanded) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
+                if (isExpanded) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary,
                 label = "背景颜色"
-            )
+            ) {
+                LogUtil.d(TAG, "颜色$it")
+            }
             // 纵向排列
             // 设置点击事件，点击将展开标志置反
             Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
