@@ -1,4 +1,4 @@
-package cn.ltt.luck.compose.widget
+package cn.ltt.luck.compose.util
 
 import android.content.Context
 import android.widget.Toast

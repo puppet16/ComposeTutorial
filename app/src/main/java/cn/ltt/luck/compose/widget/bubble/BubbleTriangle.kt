@@ -1,18 +1,21 @@
-package cn.ltt.luck.compose.activity
+package cn.ltt.luck.compose.widget.bubble
 
 import android.graphics.PointF
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import cn.ltt.luck.compose.ui.theme.ComposeTutorialTheme
-import cn.ltt.luck.compose.widget.LogUtil
+import cn.ltt.luck.compose.util.LogUtil
 import kotlin.math.max
 import kotlin.math.min
 
@@ -36,9 +39,9 @@ fun BubbleTriangle(
 ) {
     lineSizeDp.checkInRange(0f, rectWidthDp.toFloat())
 
-    Box {
+    Box(modifier = modifier.background(Color.Transparent).then(modifier)) {
         // 绘制带有弧度的三角形
-        Canvas(modifier = Modifier.size(rectWidthDp.dp, rectHeightDp.dp)) {
+        Canvas(modifier = modifier.background(Color.Transparent).then(Modifier.size(rectWidthDp.dp, rectHeightDp.dp))) {
             LogUtil.d(msg="rectWidth=$rectWidthDp, rectHeight=$rectHeightDp, lineSize=${lineSizeDp.dp.toPx()}, 实际大小：width=${size.width}, height=${size.height}")
             val path = Path()
             val leftPointF = BubbleTriangle.calLeftPointF(size, lineSizeDp.dp.toPx(), location)
@@ -71,17 +74,17 @@ fun BubbleTriangle(
                 leftPointF.x,
                 leftPointF.y
             )
-//            // 绘制阴影效果
-//            drawIntoCanvas { canvas ->
-//                canvas.save()
-//                canvas.translate(2.dp.toPx(), 2.dp.toPx()) // 设置阴影偏移量
-//                canvas.drawPath(path, Paint().apply {
-//                    color = Color.Gray
-//                    style = androidx.compose.ui.graphics.PaintingStyle.Stroke
-//                    strokeWidth = 20.dp.toPx() // 阴影宽度
-//                })
-//                canvas.restore()
-//            }
+            // 绘制阴影效果
+            drawIntoCanvas { canvas ->
+                canvas.save()
+                canvas.translate(1.dp.toPx(), 1.dp.toPx()) // 设置阴影偏移量
+                canvas.drawPath(path, Paint().apply {
+                    color = triangleColor.copy(alpha=0.2F)
+                    style = androidx.compose.ui.graphics.PaintingStyle.Stroke
+                    strokeWidth = 2.dp.toPx() // 阴影宽度
+                })
+                canvas.restore()
+            }
             // 绘制实际路径
             drawPath(path = path, color = triangleColor)
         }
@@ -230,7 +233,7 @@ class BubbleTriangle {
 @Preview
 @Composable
 fun PreviewNormalBottomLeft() {
-    ComposeTutorialTheme {
+    Surface {
         BubbleTriangle(location = TriangleLocation.BOTTOM_LEFT)
     }
 }
@@ -238,7 +241,7 @@ fun PreviewNormalBottomLeft() {
 @Preview
 @Composable
 fun PreviewNormalBottomRight() {
-    ComposeTutorialTheme {
+    Surface {
         BubbleTriangle(location = TriangleLocation.BOTTOM_RIGHT)
     }
 }
@@ -246,7 +249,7 @@ fun PreviewNormalBottomRight() {
 @Preview
 @Composable
 fun PreviewNormalTopLeft() {
-    ComposeTutorialTheme {
+    Surface {
         BubbleTriangle(location = TriangleLocation.TOP_LEFT)
     }
 }
@@ -254,7 +257,7 @@ fun PreviewNormalTopLeft() {
 @Preview
 @Composable
 fun PreviewNormalTopRight() {
-    ComposeTutorialTheme {
+    Surface {
         BubbleTriangle(location = TriangleLocation.TOP_RIGHT)
     }
 }

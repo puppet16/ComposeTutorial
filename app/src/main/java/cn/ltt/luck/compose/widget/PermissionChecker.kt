@@ -5,11 +5,13 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import cn.ltt.luck.compose.util.LogUtil
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 
@@ -65,7 +67,9 @@ fun CheckPermissions(permissions: List<String>,
         } else {
             // 直接向系统请求权限
             LogUtil.d(msg = "向系统请求权限：permissions=$permissions")
-            run { multiplePermissionsState.launchMultiplePermissionRequest() }
+            SideEffect {
+                multiplePermissionsState.launchMultiplePermissionRequest()
+            }
         }
     }
 }

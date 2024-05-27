@@ -2,6 +2,7 @@ package cn.ltt.luck.compose.activity
 
 import androidx.compose.runtime.Composable
 import cn.ltt.luck.compose.activity.base.BaseActivity
+import cn.ltt.luck.compose.widget.bubble.BubbleDialog
 
 /**
  * ============================================================
@@ -11,10 +12,10 @@ import cn.ltt.luck.compose.activity.base.BaseActivity
  * desc    用贝塞尔曲线画的消息气泡上的三角小尾巴
  * ============================================================
  **/
-class BubbleTriangleActivity  : BaseActivity() {
+class BubbleDialogActivity  : BaseActivity() {
 
     @Composable
     override fun InitializeView() {
-        BubbleTriangle()
+        BubbleDialog()
     }
 }

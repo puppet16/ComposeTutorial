@@ -37,43 +37,85 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import cn.ltt.luck.compose.util.ToastUtil
 import cn.ltt.luck.compose.widget.CheckPermissions
 import cn.ltt.luck.compose.widget.FinishCurrentActivity
-import cn.ltt.luck.compose.widget.ToastUtil
 
 class RequestMultiplePermissionsActivity : BaseActivity() {
 
+    @OptIn(ExperimentalPermissionsApi::class)
     @Composable
     override fun InitializeView() {
-//        val multiplePermissionsState = rememberMultiplePermissionsState(
-//            listOf(
-//                android.Manifest.permission.RECORD_AUDIO,
-//                android.Manifest.permission.READ_EXTERNAL_STORAGE,
-//                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//            )
-//        )
-//        Sample(multiplePermissionsState)
-        CheckPermissions(
-            listOf( android.Manifest.permission.RECORD_AUDIO,
+        val multiplePermissionsState = rememberMultiplePermissionsState(
+            listOf(
+                android.Manifest.permission.RECORD_AUDIO,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//            , @Composable { requestAction ->
-//                Column {
-//                    Text(text = "这个权限很关键，没有这个权限功能无法使用！")
-//                    Spacer(modifier = Modifier.height(8.dp))
-//                    Button(onClick = { requestAction.invoke() }) {
-//                        Text("同意")
-//                    }
-//                } }
-        ) {
-            if (it) {
-                ToastUtil.long(text = "权限请求成功$it")
-            } else {
-                FinishCurrentActivity()
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            )
+        )
+        Sample2(multiplePermissionsState)
+//        CheckPermissions(
+//            listOf( android.Manifest.permission.RECORD_AUDIO,
+//                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+//                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+////            , @Composable { requestAction ->
+////                Column {
+////                    Text(text = "这个权限很关键，没有这个权限功能无法使用！")
+////                    Spacer(modifier = Modifier.height(8.dp))
+////                    Button(onClick = { requestAction.invoke() }) {
+////                        Text("同意")
+////                    }
+////                } }
+//        ) {
+//            if (it) {
+//                ToastUtil.long(text = "权限请求成功 $it")
+//            } else {
+//                FinishCurrentActivity()
+//            }
+//        }
+//        Text(text = "这个权限很关键的啊，没有这个权限功能无法使用！")
+
+    }
+
+
+    @OptIn(ExperimentalPermissionsApi::class)
+    @Composable
+    private fun Sample2(multiplePermissionsState: MultiplePermissionsState) {
+        var check by remember {
+            mutableStateOf(false)
+        }
+        if (check) {
+            CheckPermissions(
+                listOf(
+                    android.Manifest.permission.RECORD_AUDIO,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            ) {
+                if (it) {
+                    ToastUtil.long(text = "权限请求成功 $it")
+                } else {
+                    FinishCurrentActivity()
+                }
             }
         }
-        Text(text = "这个权限很关键的啊，没有这个权限功能无法使用！")
-
+        if (multiplePermissionsState.allPermissionsGranted) {
+            // If all permissions are granted, then show screen with the feature enabled
+            Text("Record Audio and Read&Write storage permissions Granted! Thank you!")
+        } else {
+            Column {
+                Text(
+                    getTextToShowGivenPermissions(
+                        multiplePermissionsState.revokedPermissions,
+                        multiplePermissionsState.shouldShowRationale
+                    )
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Button(onClick = { check = true }) {
+                    Text("Request permissions")
+                }
+            }
+        }
     }
 
 

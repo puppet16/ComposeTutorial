@@ -42,7 +42,7 @@
         <activity android:name=".activity.PaddingMarginActivity" />
 
 
-        <activity android:name=".activity.BubbleTriangleActivity" />
+        <activity android:name=".activity.BubbleDialogActivity" />
 
         <activity android:name=".activity.RequestMultiplePermissionsActivity" />
 
