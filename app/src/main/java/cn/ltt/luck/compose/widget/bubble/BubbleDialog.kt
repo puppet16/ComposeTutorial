@@ -1,5 +1,6 @@
 package cn.ltt.luck.compose.widget.bubble
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -37,6 +38,7 @@ import cn.ltt.luck.compose.widget.bubble.BubbleDialog.Companion.decoupledConstra
  * ============================================================
  **/
 
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun BubbleDialog(
     modifier: Modifier = Modifier,
