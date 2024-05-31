@@ -32,13 +32,17 @@ import kotlinx.coroutines.delay
 fun CustomCircularProgress(
     // 是否开始走进度
     startProgress: Boolean = true,
+    // 进度条大小
     size: DpSize = DpSize(200.dp, 200.dp),
+    // 进度条的轨道颜色
     trackColor: Color = Color.Gray,
+    // 进度颜色
     progressColor: Color = Color.Red,
+    // 进度条的宽度
     strokeWidth: Dp = 8.dp,
-    // 进度条走多长时间，单位：毫秒
+    // 进度条多开始到进度走满的总时间，单位：毫秒
     totalDuration: Long = 5000,
-    // 进度条回调，第一次参数：true，表示进度执行完成，第二个参数：为当前进度：进度[0,1.0f]
+    // 进度条回调，第一次参数：true，表示进度执行完成，第二个参数：为当前进度：进度[0,1.0f]，可能会略微超出1.0f
     callback: (Boolean, Float) -> Unit = { finished: Boolean, progress: Float -> }
 ) {
     val TAG = "CustomCircularProgress"
