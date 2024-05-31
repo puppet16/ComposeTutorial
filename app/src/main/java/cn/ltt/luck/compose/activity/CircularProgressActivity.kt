@@ -1,5 +1,6 @@
 package cn.ltt.luck.compose.activity
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import cn.ltt.luck.compose.activity.base.BaseActivity
 import cn.ltt.luck.compose.util.LogUtil
 import cn.ltt.luck.compose.widget.CustomCircularProgress
@@ -68,6 +70,7 @@ class CircularProgressActivity : BaseActivity() {
             }
 
             Spacer(modifier = Modifier.size(80.dp, 80.dp))
+            Box(modifier = Modifier.size(500.dp, 500.dp), contentAlignment = Alignment.Center) {
             if (show) {
                 CustomCircularProgress(start, size = DpSize(500.dp, 500.dp)) { finished, progress ->
                     LogUtil.d("CustomCircularProgress", "是否结束：$finished, 进度：$progress")
@@ -75,6 +78,8 @@ class CircularProgressActivity : BaseActivity() {
                         show = false
                     }
                 }
+            }
+                Text(text = "圆形进度条", fontSize = 32.sp)
             }
         }
     }
