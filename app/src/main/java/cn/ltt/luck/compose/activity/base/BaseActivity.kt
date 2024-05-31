@@ -1,9 +1,9 @@
 package cn.ltt.luck.compose.activity.base
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
+import androidx.fragment.app.FragmentActivity
 import cn.ltt.luck.compose.ui.theme.ComposeTutorialTheme
 
 /**
@@ -14,7 +14,7 @@ import cn.ltt.luck.compose.ui.theme.ComposeTutorialTheme
  * desc    统一使用主题
  * ============================================================
  **/
-abstract class BaseActivity: ComponentActivity() {
+abstract class BaseActivity: FragmentActivity() {
     val TAG = this::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {

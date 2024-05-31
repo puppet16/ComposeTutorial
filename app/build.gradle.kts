@@ -71,5 +71,7 @@ dependencies {
 //    implementation("androidx.compose.material3:material3-android:1.2.1")
     implementation("com.google.accompanist:accompanist-permissions:0.35.1-alpha")
 
+    implementation("androidx.appcompat:appcompat:1.3.0")
+
 
 }
